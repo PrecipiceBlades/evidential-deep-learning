@@ -200,6 +200,7 @@ def gen_calibration_plot(df_image, eps=0.0, ood=False, plot=True):
             for p in expected_p:
                 ppf = scipy.stats.norm.ppf(p, loc=df_model["Mu"], scale=df_model["Sigma"])
                 obs_p = (df_model["Target"] < ppf).mean()
+#                 obs_p = 1/2 * ((df_model["Target"] < ppf).mean() + (df_model["Target"] < (2*df_model["Mu"]-ppf)).mean())
                 observed_p.append(obs_p)
 
             df_single = pd.DataFrame({'Method': method.value, 'Model Path': model_path,
